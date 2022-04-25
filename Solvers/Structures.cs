@@ -66,7 +66,12 @@ public class Z
         return res;
     }
 
-   
+    public override bool Equals(object? obj)
+    {
+        return obj is Z z &&
+               EqualityComparer<bool[]>.Default.Equals(values, z.values) &&
+               N == z.N;
+    }
 }
 
 public class S
@@ -90,6 +95,8 @@ public class S
         res.Ro = Ro;
         return res;
     }
+
+    
 
 
 }

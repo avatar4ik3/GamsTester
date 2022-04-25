@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "EVr4MeaMgIMZ+bS8Un5hVYFPbjey0Ebpp2RzaTkRNVbF7g5iqRZl09giDET8bDTIl0DpkEudFIJiMspYlJCdjw==",
+  "dgSpecHash": "IFqTNC7vu5sNH0Zdk/B1cvU6G6SF5SbT6+7wSZjPIwdAV0xYq5jpU4Mq+8Mqjgqf3Yi1ruBM7j7yG/AaHCdRfg==",
   "success": true,
   "projectFilePath": "C:\\Users\\cross\\source\\repos\\GamsTester\\Tester\\Tester.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cross\\.nuget\\packages\\commandlineparser\\2.9.0-preview1\\commandlineparser.2.9.0-preview1.nupkg.sha512",
+    "C:\\Users\\cross\\.nuget\\packages\\mathnet.numerics\\5.0.0\\mathnet.numerics.5.0.0.nupkg.sha512",
     "C:\\Users\\cross\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.0\\microsoft.extensions.configuration.6.0.0.nupkg.sha512",
     "C:\\Users\\cross\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\cross\\.nuget\\packages\\microsoft.extensions.configuration.binder\\6.0.0\\microsoft.extensions.configuration.binder.6.0.0.nupkg.sha512",

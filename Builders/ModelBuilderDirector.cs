@@ -33,4 +33,18 @@ public class ModelBuilderDirector
         }
         return Builder.Build;
     }
+
+    public Model BuildConcreteModel()
+    {
+        Builder.AddGenerator(new CGenerator(Random, Builder.Generator.Model, 26));
+        Builder.AddGenerator(new CountMaxGenerator(Random, Builder.Generator.Model, 2));
+        Builder.AddGenerator(new StoresCountGenerator(Random, Builder.Generator.Model, 3));
+        Builder.AddGenerator(new CustomersCountGenerator(Random, Builder.Generator.Model, 3));
+        Builder.AddGenerator(new ConcreteTGenerator(Builder.Generator.Model, new int[3][]{new int[3]{4,7,11},new int[3]{6,2,2},new int[3]{8,1,9}}));
+
+        Builder.AddGenerator(new ConcreteWGenerator(Builder.Generator.Model, new int[3]{1,5,7}));
+
+
+        return Builder.Build;
+    }
 }

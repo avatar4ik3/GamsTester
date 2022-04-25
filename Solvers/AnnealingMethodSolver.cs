@@ -1,3 +1,6 @@
+using MathNet;
+using MathNet.Numerics;
+
 namespace Tester;
 public class AnnealingMethodSolver : Solver
 {
@@ -10,52 +13,47 @@ public class AnnealingMethodSolver : Solver
     public override ResultModel Solve()
     {
         var s_asterix = FindBadSolution();
-        var record = s_asterix.Ro;
         var tk = (double)(Config.T_Max);
+        List<Z> reached_solutions = new List<Z>();
+        reached_solutions.Add(s_asterix.Z);
+        int all_possible_solution_count = (int)SpecialFunctions.Factorial(Model.Stores_Count) / (int)((SpecialFunctions.Factorial(Model.Stores_Count - Model.Count_Max)) * SpecialFunctions.Factorial(Model.Count_Max));
         while (tk > Config.T_Min)
         {
+            if (reached_solutions.Count() == all_possible_solution_count)
+            {
+                return s_asterix.Convert();
+            }
             foreach (var itteration in Enumerable.Range(0, Config.L))
             {
-                //создать множество решений с перестановкой параметров, пока что так 
-                //возможно это и не нужно поскольку это эквивалентно
-                var s_apos = s_asterix.Swap().Copy();
-                s_apos.Ro = s_apos.FindRo(Model);
-
-                if (s_apos.Ro >= record)
+                var s_apos = s_asterix.Swap(Model).Copy();
+                if (reached_solutions.Contains(s_apos.Z)) continue;
+                reached_solutions.Add(s_apos.Z);
+                if (s_apos.Ro > s_asterix.Ro)
                 {
-                    //переход состояния. 
                     s_asterix = s_apos.Copy();
-                    record = s_apos.Ro;
                 }
                 else
                 {
-                    var p = Math.Exp((s_apos.Ro - record) / tk);
-                    var rand = new Random().NextDouble();
-                    if (rand < p)
+                    var p = Math.Exp((s_apos.Ro - s_asterix.Ro) / tk);
+                    if (new Random().NextDouble() > p)
                     {
-                        //ничего не делаем
-                    }
-                    else
-                    {
-                        // тут переход состояния
                         s_asterix = s_apos.Copy();
-                        record = s_apos.Ro;
                     }
                 }
             }
             tk *= Config.Phi;
-            Console.WriteLine(tk);
+            //Console.WriteLine(tk);
         }
         return s_asterix.Convert();
     }
 
     private S FindBadSolution()
     {
-        var result = new S(Config.Stores_Count,Config.Customers_Count);
+        var result = new S(Config.Stores_Count, Config.Customers_Count);
 
         result.Z.FillWithRandomElements(Config.Count_max);
 
-        result.FillWithRandomElements();
+        result.PlaceTruesInMostSuitablePlaces(Model);
 
         result.Ro = result.FindRo(Model);
         return result;
