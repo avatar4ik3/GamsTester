@@ -23,7 +23,7 @@ public class SolverDirector
         List<Model> models = new List<Model>();
         foreach (var i in Enumerable.Range(1, Config.Itterations))
         {
-            models.Add(BuilderDirector.BuildConcreteModel());
+            models.Add(BuilderDirector.BuildRandomModel());
         }
 
         // foreach (var i in Enumerable.Range(1, Config.Itterations))
