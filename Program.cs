@@ -63,6 +63,8 @@ public class Config
     public int W_Value_Model { get; set; }
     public int W_Min { get; set; }
     public int W_Max { get; set; }
+    public int T_Min_Model { get; set; }
+    public int T_Max_Model { get; set; }
     public int T_Min { get; set; }
     public int T_Max { get; set; }
     public int L { get; set; }
