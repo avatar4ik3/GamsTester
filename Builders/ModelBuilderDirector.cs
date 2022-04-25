@@ -19,7 +19,7 @@ public class ModelBuilderDirector
         Builder.AddGenerator(new CountMaxGenerator(Random, Builder.Generator.Model, Config.Count_max));
         Builder.AddGenerator(new StoresCountGenerator(Random, Builder.Generator.Model, Config.Stores_Count));
         Builder.AddGenerator(new CustomersCountGenerator(Random, Builder.Generator.Model, Config.Customers_Count));
-        Builder.AddGenerator(new TMinMaxGenerator(Random, Builder.Generator.Model, Config.T_Min, Config.T_Max));
+        Builder.AddGenerator(new TMinMaxGenerator(Random, Builder.Generator.Model, Config.T_Min_Model, Config.T_Max_Model));
 
         if (Config.W_Value_Model == 0)
         {
