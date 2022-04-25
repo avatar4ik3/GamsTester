@@ -1,0 +1,623 @@
+GAMS 35.2.0  r33388c4 Released Jun  2, 2021 WEX-WEI x86 64bit/MS Windows - 04/23/22 14:53:50 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+   1  Set i a;
+   2  Set j a;
+   3   
+   4  Scalar C a;
+   5   
+   6  Parameter t(i,j) a;
+   7   
+   8  Parameter w(j) a;
+   9   
+  10  Scalar count_max a
+  11   
+  12   
+GDXIN   C:\Users\cross\OneDrive\Documents\GAMS\Studio\workspace\_gams_net_gdb0.gdx
+--- LOAD  C = 4:C
+--- LOAD  count_max = 3:count_max
+--- LOAD  i = 1:i
+--- LOAD  j = 2:j
+--- LOAD  w = 6:w
+--- LOAD  t = 5:t
+  22   
+  23  display i,j,c,count_max,w,t;
+  24  Variables
+  25      z(i) 1- если объект открыт на месте i 0 - иначе
+  26      x(i,j) обслуживание клиентов объектами
+  27      p норма отклонения
+  28      l(j) отклонение  от w(i) ;
+  29   
+  30  Binary Variable z;
+  31  Binary Variable x;
+  32  Positive Variable l;
+  33   
+  34  Equations
+  35      e_1(j)
+  36      e_2
+  37      e_3(j)
+  38      e_4
+  39      e_5(i,j)
+  40  ;
+  41   
+  42  e_1(j) ..   p =l= l(j);
+  43  e_2 ..  sum(i,sum(j,(w(j) + l(j))*t(i,j)*x(i,j))) =l= C;
+  44  e_3(j)  ..  sum(i,x(i,j)) =e= 1;
+  45  e_4 ..  sum(i,z(i)) =e= count_max;
+  46  e_5(i,j)    ..  x(i,j) =l=  z(i);
+  47   
+  48  option minlp = alphaecp;
+  49  Model task /all/;
+  50   
+  51  Solve task using minlp maximizing p;
+  52  display x.l,z.l,l.l,p.l;
+GAMS 35.2.0  r33388c4 Released Jun  2, 2021 WEX-WEI x86 64bit/MS Windows - 04/23/22 14:53:50 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Include File Summary
+
+
+   SEQ   GLOBAL TYPE      PARENT   LOCAL  FILENAME
+
+     1        1 INPUT          0       0  C:\Users\cross\OneDrive\Documents\GAMS\Studio\workspace\new7.gms
+     2       14 GDXIN          1      14  C:\Users\cross\OneDrive\Documents\GAMS\Studio\workspace\_gams_net_gdb0.gdx
+
+
+COMPILATION TIME     =        0.016 SECONDS      3 MB  35.2.0 r33388c4 WEX-WEI
+GAMS 35.2.0  r33388c4 Released Jun  2, 2021 WEX-WEI x86 64bit/MS Windows - 04/23/22 14:53:50 Page 3
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+E x e c u t i o n
+
+
+----     23 SET i  a
+
+1s ,    2s ,    3s ,    4s ,    5s ,    6s ,    7s ,    8s ,    9s ,    10s
+
+
+----     23 SET j  a
+
+1c ,    2c ,    3c ,    4c ,    5c ,    6c ,    7c ,    8c ,    9c ,    10c
+
+
+----     23 PARAMETER C                    =    10000.000  a
+            PARAMETER count_max            =        3.000  a
+
+----     23 PARAMETER w  a
+
+1c  11.000,    2c  14.000,    3c  27.000,    4c  26.000,    5c  23.000,    6c  28.000,    7c  23.000,    8c  18.000,    9c  22.000,    10c 23.000
+
+
+----     23 PARAMETER t  a
+
+             1c          2c          3c          4c          5c          6c          7c          8c          9c         10c
+
+1s       85.000      70.000      56.000      20.000      57.000     119.000      97.000      28.000     111.000     119.000
+2s      100.000     109.000     120.000      80.000      56.000      47.000      35.000     139.000      71.000     137.000
+3s      119.000     125.000      23.000      38.000      91.000      96.000      40.000      34.000      45.000     100.000
+4s      105.000      25.000      27.000     110.000      41.000      80.000      35.000      31.000      48.000      96.000
+5s       44.000     103.000      94.000     125.000      56.000     109.000      54.000      44.000      95.000     113.000
+6s      134.000      71.000      49.000      66.000     115.000      99.000      67.000      38.000      69.000     100.000
+7s       98.000      83.000     123.000      31.000      33.000      95.000     101.000      30.000      58.000     116.000
+8s       31.000      24.000     110.000     115.000     113.000      36.000      51.000      37.000     122.000     121.000
+9s       61.000     136.000      79.000      71.000     105.000      53.000     115.000     101.000     134.000      81.000
+10s      33.000     136.000     101.000      87.000     137.000     100.000     120.000      83.000     112.000     100.000
+
+GAMS 35.2.0  r33388c4 Released Jun  2, 2021 WEX-WEI x86 64bit/MS Windows - 04/23/22 14:53:50 Page 4
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE task Using MINLP From line 51
+
+
+---- e_1  =L=  
+
+e_1(1c)..  p - l(1c) =L= 0 ; (LHS = 0)
+     
+e_1(2c)..  p - l(2c) =L= 0 ; (LHS = 0)
+     
+e_1(3c)..  p - l(3c) =L= 0 ; (LHS = 0)
+     
+REMAINING 7 ENTRIES SKIPPED
+
+
+---- e_2  =L=  
+
+e_2..  (935)*x(1s,1c) + (980)*x(1s,2c) + (1512)*x(1s,3c) + (520)*x(1s,4c) + (1311)*x(1s,5c) + (3332)*x(1s,6c) + (2231)*x(1s,7c) + (504)*x(1s,8c) + (2442)*x(1s,9c) + (2737)*x(1s,10c) + (1100)*x(2s,1c) + (1526)*x(2s,2c) + (3240)*x(2s,3c) + (2080)*x(2s,4c) + (1288)*x(2s,5c) + (1316)*x(2s,6c) + (805)*x(2s,7c) + (2502)*x(2s,8c) + (1562)*x(2s,9c) + (3151)*x(2s,10c) + (1309)*x(3s,1c) + (1750)*x(3s,2c) + (621)*x(3s,3c) + (988)*x(3s,4c) + (2093)*x(3s,5c) + (2688)*x(3s,6c) + (920)*x(3s,7c) + (612)*x(3s,8c) + (990)*x(3s,9c) + (2300)*x(3s,10c) + (1155)*x(4s,1c) + (350)*x(4s,2c) + (729)*x(4s,3c) + (2860)*x(4s,4c) + (943)*x(4s,5c) + (2240)*x(4s,6c) + (805)*x(4s,7c) + (558)*x(4s,8c) + (1056)*x(4s,9c) + (2208)*x(4s,10c) + (484)*x(5s,1c) + (1442)*x(5s,2c) + (2538)*x(5s,3c) + (3250)*x(5s,4c) + (1288)*x(5s,5c) + (3052)*x(5s,6c) + (1242)*x(5s,7c) + (792)*x(5s,8c) + (2090)*x(5s,9c) + (2599)*x(5s,10c) + (1474)*x(6s,1c) + (994)*x(6s,2c) + (1323)*x(6s,3c) + (1716)*x(6s,4c) + (2645)*x(6s,5c) + (2772)*x(6s,6c) + (1541)*x(6s,7c) + (684)*x(6s,8c) + (1518)*x(6s,9c) + (2300)*x(6s,10c) + (1078)*x(7s,1c) + (1162)*x(7s,2c) + (3321)*x(7s,3c) + (806)*x(7s,4c) + (759)*x(7s,5c) + (2660)*x(7s,6c) + (2323)*x(7s,7c) + (540)*x(7s,8c) + (1276)*x(7s,9c) + (2668)*x(7s,10c) + (341)*x(8s,1c) + (336)*x(8s,2c) + (2970)*x(8s,3c) + (2990)*x(8s,4c) + (2599)*x(8s,5c) + (1008)*x(8s,6c) + (1173)*x(8s,7c) + (666)*x(8s,8c) + (2684)*x(8s,9c) + (2783)*x(8s,10c) + (671)*x(9s,1c) + (1904)*x(9s,2c) + (2133)*x(9s,3c) + (1846)*x(9s,4c) + (2415)*x(9s,5c) + (1484)*x(9s,6c) + (2645)*x(9s,7c) + (1818)*x(9s,8c) + (2948)*x(9s,9c) + (1863)*x(9s,10c) + (363)*x(10s,1c) + (1904)*x(10s,2c) + (2727)*x(10s,3c) + (2262)*x(10s,4c) + (3151)*x(10s,5c) + (2800)*x(10s,6c) + (2760)*x(10s,7c) + (1494)*x(10s,8c) + (2464)*x(10s,9c) + (2300)*x(10s,10c) + (0)*l(1c) + (0)*l(2c) + (0)*l(3c) + (0)*l(4c) + (0)*l(5c) + (0)*l(6c) + (0)*l(7c) + (0)*l(8c) + (0)*l(9c) + (0)*l(10c) =L= 10000 ; (LHS = 0)
+     
+
+---- e_3  =E=  
+
+e_3(1c)..  x(1s,1c) + x(2s,1c) + x(3s,1c) + x(4s,1c) + x(5s,1c) + x(6s,1c) + x(7s,1c) + x(8s,1c) + x(9s,1c) + x(10s,1c) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+e_3(2c)..  x(1s,2c) + x(2s,2c) + x(3s,2c) + x(4s,2c) + x(5s,2c) + x(6s,2c) + x(7s,2c) + x(8s,2c) + x(9s,2c) + x(10s,2c) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+e_3(3c)..  x(1s,3c) + x(2s,3c) + x(3s,3c) + x(4s,3c) + x(5s,3c) + x(6s,3c) + x(7s,3c) + x(8s,3c) + x(9s,3c) + x(10s,3c) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+REMAINING 7 ENTRIES SKIPPED
+
+
+---- e_4  =E=  
+
+e_4..  z(1s) + z(2s) + z(3s) + z(4s) + z(5s) + z(6s) + z(7s) + z(8s) + z(9s) + z(10s) =E= 3 ; (LHS = 0, INFES = 3 ****)
+     
+
+---- e_5  =L=  
+
+e_5(1s,1c)..  - z(1s) + x(1s,1c) =L= 0 ; (LHS = 0)
+     
+e_5(1s,2c)..  - z(1s) + x(1s,2c) =L= 0 ; (LHS = 0)
+     
+e_5(1s,3c)..  - z(1s) + x(1s,3c) =L= 0 ; (LHS = 0)
+     
+REMAINING 97 ENTRIES SKIPPED
+
+GAMS 35.2.0  r33388c4 Released Jun  2, 2021 WEX-WEI x86 64bit/MS Windows - 04/23/22 14:53:50 Page 5
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE task Using MINLP From line 51
+
+
+---- z  1- если объект открыт на месте i 0 - иначе
+
+z(1s)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       e_4
+       -1       e_5(1s,1c)
+       -1       e_5(1s,2c)
+       -1       e_5(1s,3c)
+       -1       e_5(1s,4c)
+       -1       e_5(1s,5c)
+       -1       e_5(1s,6c)
+       -1       e_5(1s,7c)
+       -1       e_5(1s,8c)
+       -1       e_5(1s,9c)
+       -1       e_5(1s,10c)
+
+z(2s)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       e_4
+       -1       e_5(2s,1c)
+       -1       e_5(2s,2c)
+       -1       e_5(2s,3c)
+       -1       e_5(2s,4c)
+       -1       e_5(2s,5c)
+       -1       e_5(2s,6c)
+       -1       e_5(2s,7c)
+       -1       e_5(2s,8c)
+       -1       e_5(2s,9c)
+       -1       e_5(2s,10c)
+
+z(3s)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       e_4
+       -1       e_5(3s,1c)
+       -1       e_5(3s,2c)
+       -1       e_5(3s,3c)
+       -1       e_5(3s,4c)
+       -1       e_5(3s,5c)
+       -1       e_5(3s,6c)
+       -1       e_5(3s,7c)
+       -1       e_5(3s,8c)
+       -1       e_5(3s,9c)
+       -1       e_5(3s,10c)
+
+REMAINING 7 ENTRIES SKIPPED
+
+---- x  обслуживание клиентов объектами
+
+x(1s,1c)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     (935)      e_2
+        1       e_3(1c)
+        1       e_5(1s,1c)
+
+x(1s,2c)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     (980)      e_2
+        1       e_3(2c)
+        1       e_5(1s,2c)
+
+x(1s,3c)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+    (1512)      e_2
+        1       e_3(3c)
+        1       e_5(1s,3c)
+
+REMAINING 97 ENTRIES SKIPPED
+
+---- p  норма отклонения
+
+p
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       e_1(1c)
+        1       e_1(2c)
+        1       e_1(3c)
+        1       e_1(4c)
+        1       e_1(5c)
+        1       e_1(6c)
+        1       e_1(7c)
+        1       e_1(8c)
+        1       e_1(9c)
+        1       e_1(10c)
+
+
+---- l  отклонение  от w(i)
+
+l(1c)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       e_1(1c)
+       (0)      e_2
+
+l(2c)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       e_1(2c)
+       (0)      e_2
+
+l(3c)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       e_1(3c)
+       (0)      e_2
+
+REMAINING 7 ENTRIES SKIPPED
+GAMS 35.2.0  r33388c4 Released Jun  2, 2021 WEX-WEI x86 64bit/MS Windows - 04/23/22 14:53:50 Page 6
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE task Using MINLP From line 51
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS          122
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES          121
+NON ZERO ELEMENTS           440     NON LINEAR N-Z            110
+CODE LENGTH                 501     CONSTANT POOL             175     DISCRETE VARIABLES        110
+
+
+GENERATION TIME      =        0.015 SECONDS      4 MB  35.2.0 r33388c4 WEX-WEI
+GAMS 35.2.0  r33388c4 Released Jun  2, 2021 WEX-WEI x86 64bit/MS Windows - 04/23/22 14:53:50 Page 7
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE task Using MINLP From line 51
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   task                OBJECTIVE  p
+     TYPE    MINLP               DIRECTION  MAXIMIZE
+     SOLVER  ALPHAECP            FROM LINE  51
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      8 Integer Solution          
+**** OBJECTIVE VALUE                4.0155
+
+ RESOURCE USAGE, LIMIT          0.438 10000000000.000
+ ITERATION COUNT, LIMIT        19    2147483647
+ EVALUATION ERRORS              0             0
+
+AlphaECP         35.2.0 r33388c4 Released Jun  2, 2021 WEI x86 64bit/MS Window
+
+*** This solver runs with a demo license. No commercial use.
+
+---- EQU e_1  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+1c         -INF             .              .       -3.55271E-15      
+2c         -INF             .              .             EPS         
+3c         -INF             .              .             EPS         
+4c         -INF             .              .             EPS         
+5c         -INF             .              .             EPS         
+6c         -INF             .              .             EPS         
+7c         -INF             .              .             EPS         
+8c         -INF             .              .             EPS         
+9c         -INF             .              .             EPS         
+10c        -INF             .              .             EPS         
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU e_2               -INF        10000.0000     10000.0000     10000.0000      
+
+---- EQU e_3  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+1c          1.0000         1.0000         1.0000         1.0000      
+2c          1.0000         1.0000         1.0000         1.0000      
+3c          1.0000         1.0000         1.0000         1.0000      
+4c          1.0000         1.0000         1.0000         1.0000      
+5c          1.0000         1.0000         1.0000         1.0000      
+6c          1.0000         1.0000         1.0000         1.0000      
+7c          1.0000         1.0000         1.0000         1.0000      
+8c          1.0000         1.0000         1.0000         1.0000      
+9c          1.0000         1.0000         1.0000         1.0000      
+10c         1.0000         1.0000         1.0000         1.0000      
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU e_4                3.0000         3.0000         3.0000         3.0000      
+
+---- EQU e_5  
+
+               LOWER          LEVEL          UPPER         MARGINAL
+
+1s .1c         -INF           -1.0000          .            -1.0000      
+1s .2c         -INF           -1.0000          .            -1.0000      
+1s .3c         -INF           -1.0000          .            -1.0000      
+1s .4c         -INF             .              .              .          
+1s .5c         -INF           -1.0000          .            -1.0000      
+1s .6c         -INF           -1.0000          .            -1.0000      
+1s .7c         -INF           -1.0000          .            -1.0000      
+1s .8c         -INF             .              .              .          
+1s .9c         -INF           -1.0000          .            -1.0000      
+1s .10c        -INF           -1.0000          .            -1.0000      
+2s .1c         -INF             .              .              .          
+2s .2c         -INF             .              .              .          
+2s .3c         -INF             .              .              .          
+2s .4c         -INF             .              .              .          
+2s .5c         -INF             .              .              .          
+2s .6c         -INF             .              .              .          
+2s .7c         -INF             .              .              .          
+2s .8c         -INF             .              .              .          
+2s .9c         -INF             .              .              .          
+2s .10c        -INF             .              .              .          
+3s .1c         -INF             .              .              .          
+3s .2c         -INF             .              .              .          
+3s .3c         -INF             .              .              .          
+3s .4c         -INF             .              .              .          
+3s .5c         -INF             .              .              .          
+3s .6c         -INF             .              .              .          
+3s .7c         -INF             .              .              .          
+3s .8c         -INF             .              .              .          
+3s .9c         -INF             .              .              .          
+3s .10c        -INF             .              .              .          
+4s .1c         -INF           -1.0000          .            -1.0000      
+4s .2c         -INF           -1.0000          .            -1.0000      
+4s .3c         -INF             .              .              .          
+4s .4c         -INF           -1.0000          .            -1.0000      
+4s .5c         -INF             .              .              .          
+4s .6c         -INF           -1.0000          .            -1.0000      
+4s .7c         -INF             .              .              .          
+4s .8c         -INF           -1.0000          .            -1.0000      
+4s .9c         -INF             .              .              .          
+4s .10c        -INF             .              .              .          
+5s .1c         -INF             .              .              .          
+5s .2c         -INF             .              .              .          
+5s .3c         -INF             .              .              .          
+5s .4c         -INF             .              .              .          
+5s .5c         -INF             .              .              .          
+5s .6c         -INF             .              .              .          
+5s .7c         -INF             .              .              .          
+5s .8c         -INF             .              .              .          
+5s .9c         -INF             .              .              .          
+5s .10c        -INF             .              .              .          
+6s .1c         -INF             .              .              .          
+6s .2c         -INF             .              .              .          
+6s .3c         -INF             .              .              .          
+6s .4c         -INF             .              .              .          
+6s .5c         -INF             .              .              .          
+6s .6c         -INF             .              .              .          
+6s .7c         -INF             .              .              .          
+6s .8c         -INF             .              .              .          
+6s .9c         -INF             .              .              .          
+6s .10c        -INF             .              .              .          
+7s .1c         -INF             .              .              .          
+7s .2c         -INF             .              .              .          
+7s .3c         -INF             .              .              .          
+7s .4c         -INF             .              .              .          
+7s .5c         -INF             .              .              .          
+7s .6c         -INF             .              .              .          
+7s .7c         -INF             .              .              .          
+7s .8c         -INF             .              .              .          
+7s .9c         -INF             .              .              .          
+7s .10c        -INF             .              .              .          
+8s .1c         -INF             .              .              .          
+8s .2c         -INF             .              .              .          
+8s .3c         -INF           -1.0000          .            -1.0000      
+8s .4c         -INF           -1.0000          .            -1.0000      
+8s .5c         -INF           -1.0000          .            -1.0000      
+8s .6c         -INF             .              .              .          
+8s .7c         -INF           -1.0000          .            -1.0000      
+8s .8c         -INF           -1.0000          .            -1.0000      
+8s .9c         -INF           -1.0000          .            -1.0000      
+8s .10c        -INF           -1.0000          .            -1.0000      
+9s .1c         -INF             .              .              .          
+9s .2c         -INF             .              .              .          
+9s .3c         -INF             .              .              .          
+9s .4c         -INF             .              .              .          
+9s .5c         -INF             .              .              .          
+9s .6c         -INF             .              .              .          
+9s .7c         -INF             .              .              .          
+9s .8c         -INF             .              .              .          
+9s .9c         -INF             .              .              .          
+9s .10c        -INF             .              .              .          
+10s.1c         -INF             .              .              .          
+10s.2c         -INF             .              .              .          
+10s.3c         -INF             .              .              .          
+10s.4c         -INF             .              .              .          
+10s.5c         -INF             .              .              .          
+10s.6c         -INF             .              .              .          
+10s.7c         -INF             .              .              .          
+10s.8c         -INF             .              .              .          
+10s.9c         -INF             .              .              .          
+10s.10c        -INF             .              .              .          
+
+---- VAR z  1- если объект открыт на месте i 0 - иначе
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+1s           .             1.0000         1.0000         EPS         
+2s           .              .             1.0000         EPS         
+3s           .              .             1.0000         EPS         
+4s           .             1.0000         1.0000         EPS         
+5s           .              .             1.0000         EPS         
+6s           .              .             1.0000         EPS         
+7s           .              .             1.0000         EPS         
+8s           .             1.0000         1.0000         EPS         
+9s           .              .             1.0000         EPS         
+10s          .              .             1.0000         EPS         
+
+---- VAR x  обслуживание клиентов объектами
+
+               LOWER          LEVEL          UPPER         MARGINAL
+
+1s .1c           .              .             1.0000        -3.3065      
+1s .2c           .              .             1.0000        -3.2671      
+1s .3c           .              .             1.0000        -4.4997      
+1s .4c           .             1.0000         1.0000        -1.5552      
+1s .5c           .              .             1.0000        -3.9893      
+1s .6c           .              .             1.0000        -9.8701      
+1s .7c           .              .             1.0000        -6.7889      
+1s .8c           .             1.0000         1.0000        -1.5970      
+1s .9c           .              .             1.0000        -7.4812      
+1s .10c          .              .             1.0000        -8.3286      
+2s .1c           .              .             1.0000        -3.8900      
+2s .2c           .              .             1.0000        -5.0873      
+2s .3c           .              .             1.0000        -9.6421      
+2s .4c           .              .             1.0000        -6.2208      
+2s .5c           .              .             1.0000        -3.9194      
+2s .6c           .              .             1.0000        -3.8983      
+2s .7c           .              .             1.0000        -2.4496      
+2s .8c           .              .             1.0000        -7.9279      
+2s .9c           .              .             1.0000        -4.7852      
+2s .10c          .              .             1.0000        -9.5884      
+3s .1c           .              .             1.0000        -4.6291      
+3s .2c           .              .             1.0000        -5.8340      
+3s .3c           .              .             1.0000        -1.8481      
+3s .4c           .              .             1.0000        -2.9549      
+3s .5c           .              .             1.0000        -6.3689      
+3s .6c           .              .             1.0000        -7.9624      
+3s .7c           .              .             1.0000        -2.7995      
+3s .8c           .              .             1.0000        -1.9392      
+3s .9c           .              .             1.0000        -3.0329      
+3s .10c          .              .             1.0000        -6.9988      
+4s .1c           .              .             1.0000        -4.0845      
+4s .2c           .              .             1.0000        -1.1668      
+4s .3c           .             1.0000         1.0000        -2.1695      
+4s .4c           .              .             1.0000        -8.5537      
+4s .5c           .             1.0000         1.0000        -2.8695      
+4s .6c           .              .             1.0000        -6.6353      
+4s .7c           .             1.0000         1.0000        -2.4496      
+4s .8c           .              .             1.0000        -1.7681      
+4s .9c           .             1.0000         1.0000        -3.2351      
+4s .10c          .             1.0000         1.0000        -6.7189      
+5s .1c           .              .             1.0000        -1.7116      
+5s .2c           .              .             1.0000        -4.8073      
+5s .3c           .              .             1.0000        -7.5530      
+5s .4c           .              .             1.0000        -9.7201      
+5s .5c           .              .             1.0000        -3.9194      
+5s .6c           .              .             1.0000        -9.0407      
+5s .7c           .              .             1.0000        -3.7794      
+5s .8c           .              .             1.0000        -2.5095      
+5s .9c           .              .             1.0000        -6.4028      
+5s .10c          .              .             1.0000        -7.9087      
+6s .1c           .              .             1.0000        -5.2127      
+6s .2c           .              .             1.0000        -3.3137      
+6s .3c           .              .             1.0000        -3.9372      
+6s .4c           .              .             1.0000        -5.1322      
+6s .5c           .              .             1.0000        -8.0487      
+6s .6c           .              .             1.0000        -8.2112      
+6s .7c           .              .             1.0000        -4.6892      
+6s .8c           .              .             1.0000        -2.1673      
+6s .9c           .              .             1.0000        -4.6504      
+6s .10c          .              .             1.0000        -6.9988      
+7s .1c           .              .             1.0000        -3.8122      
+7s .2c           .              .             1.0000        -3.8738      
+7s .3c           .              .             1.0000        -9.8832      
+7s .4c           .              .             1.0000        -2.4106      
+7s .5c           .              .             1.0000        -2.3096      
+7s .6c           .              .             1.0000        -7.8795      
+7s .7c           .              .             1.0000        -7.0688      
+7s .8c           .              .             1.0000        -1.7111      
+7s .9c           .              .             1.0000        -3.9091      
+7s .10c          .              .             1.0000        -8.1187      
+8s .1c           .             1.0000         1.0000        -1.2059      
+8s .2c           .             1.0000         1.0000        -1.1201      
+8s .3c           .              .             1.0000        -8.8386      
+8s .4c           .              .             1.0000        -8.9425      
+8s .5c           .              .             1.0000        -7.9087      
+8s .6c           .             1.0000         1.0000        -2.9859      
+8s .7c           .              .             1.0000        -3.5694      
+8s .8c           .              .             1.0000        -2.1103      
+8s .9c           .              .             1.0000        -8.2225      
+8s .10c          .              .             1.0000        -8.4686      
+9s .1c           .              .             1.0000        -2.3729      
+9s .2c           .              .             1.0000        -6.3474      
+9s .3c           .              .             1.0000        -6.3477      
+9s .4c           .              .             1.0000        -5.5210      
+9s .5c           .              .             1.0000        -7.3488      
+9s .6c           .              .             1.0000        -4.3959      
+9s .7c           .              .             1.0000        -8.0487      
+9s .8c           .              .             1.0000        -5.7605      
+9s .9c           .              .             1.0000        -9.0313      
+9s .10c          .              .             1.0000        -5.6691      
+10s.1c           .              .             1.0000        -1.2837      
+10s.2c           .              .             1.0000        -6.3474      
+10s.3c           .              .             1.0000        -8.1155      
+10s.4c           .              .             1.0000        -6.7652      
+10s.5c           .              .             1.0000        -9.5884      
+10s.6c           .              .             1.0000        -8.2942      
+10s.7c           .              .             1.0000        -8.3986      
+10s.8c           .              .             1.0000        -4.7339      
+10s.9c           .              .             1.0000        -7.5486      
+10s.10c          .              .             1.0000        -6.9988      
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR p                 -INF            4.0155        +INF             .          
+
+  p  норма отклонения
+
+---- VAR l  отклонение  от w(i)
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+1c           .             4.0155        +INF             .          
+2c           .             4.0155        +INF             .          
+3c           .             4.0155        +INF             .          
+4c           .             4.0155        +INF             .          
+5c           .             4.0155        +INF             .          
+6c           .             4.0155        +INF             .          
+7c           .             4.0155        +INF             .          
+8c           .             4.0155        +INF             .          
+9c           .             4.0155        +INF             .          
+10c          .             4.0155        +INF             .          
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+                             0     ERRORS
+GAMS 35.2.0  r33388c4 Released Jun  2, 2021 WEX-WEI x86 64bit/MS Windows - 04/23/22 14:53:50 Page 8
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+E x e c u t i o n
+
+
+----     52 VARIABLE x.L  обслуживание клиентов объектами
+
+             1c          2c          3c          4c          5c          6c          7c          8c          9c         10c
+
+1s                                            1.000                                           1.000
+4s                                1.000                   1.000                   1.000                   1.000       1.000
+8s        1.000       1.000                                           1.000
+
+
+----     52 VARIABLE z.L  1- если объект открыт на месте i 0 - иначе
+
+1s 1.000,    4s 1.000,    8s 1.000
+
+
+----     52 VARIABLE l.L  отклонение  от w(i)
+
+1c  4.016,    2c  4.016,    3c  4.016,    4c  4.016,    5c  4.016,    6c  4.016,    7c  4.016,    8c  4.016,    9c  4.016,    10c 4.016
+
+
+----     52 VARIABLE p.L                   =        4.016  норма отклонения
+
+
+EXECUTION TIME       =        0.469 SECONDS      4 MB  35.2.0 r33388c4 WEX-WEI
+
+
+USER: GAMS Demo license for Denis Trusenko           G210725|0002CO-GEN
+      Omsk State Uneverse, Russian Federation                  DL045166
+
+
+**** FILE SUMMARY
+
+Input      C:\Users\cross\OneDrive\Documents\GAMS\Studio\workspace\new7.gms
+Output     C:\Users\cross\OneDrive\Documents\GAMS\Studio\workspace\_gams_net_gjo0.lst

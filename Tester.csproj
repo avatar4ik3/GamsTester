@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GAMS.net4">
+      <HintPath>..\..\..\..\..\..\GAMS\35\GAMS.net4.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.0-preview1"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0"/>
+  </ItemGroup>
+</Project>
