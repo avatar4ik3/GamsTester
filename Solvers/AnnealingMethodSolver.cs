@@ -1,3 +1,4 @@
+using CH.Combinations;
 using MathNet;
 using MathNet.Numerics;
 
@@ -9,7 +10,6 @@ public class AnnealingMethodSolver : Solver
     {
 
     }
-
     public override ResultModel Solve()
     {
         var s_asterix = FindBadSolution();
@@ -19,6 +19,7 @@ public class AnnealingMethodSolver : Solver
         int all_possible_solution_count = (int)SpecialFunctions.Factorial(Model.Stores_Count) / (int)((SpecialFunctions.Factorial(Model.Stores_Count - Model.Count_Max)) * SpecialFunctions.Factorial(Model.Count_Max));
         while (tk > Config.T_Min)
         {
+            Console.WriteLine(tk);
             if (reached_solutions.Count() == all_possible_solution_count)
             {
                 return s_asterix.Convert();
@@ -26,8 +27,10 @@ public class AnnealingMethodSolver : Solver
             foreach (var itteration in Enumerable.Range(0, Config.L))
             {
                 var s_apos = s_asterix.Swap(Model).Copy();
-                if (reached_solutions.Contains(s_apos.Z)) continue;
-                reached_solutions.Add(s_apos.Z);
+                if (!reached_solutions.Contains(s_apos.Z))
+                {
+                    reached_solutions.Add(s_apos.Z);
+                }
                 if (s_apos.Ro > s_asterix.Ro)
                 {
                     s_asterix = s_apos.Copy();

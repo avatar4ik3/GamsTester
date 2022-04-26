@@ -224,6 +224,16 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "Combinator/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Combinator.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Combinator.dll": {}
+        }
       }
     }
   },
@@ -618,10 +628,16 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Combinator/1.0.0": {
+      "type": "project",
+      "path": "../Combinator/Combinator.csproj",
+      "msbuildProject": "../Combinator/Combinator.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Combinator >= 1.0.0",
       "CommandLineParser >= 2.9.0-preview1",
       "MathNet.Numerics >= 5.0.0",
       "Microsoft.Extensions.Configuration >= 6.0.0",
@@ -637,11 +653,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\cross\\source\\repos\\GamsTester\\Tester\\Tester.csproj",
+      "projectUniqueName": "C:\\Users\\cross\\source\\repos\\GamsTester\\Tester\\Tester.csproj",
       "projectName": "Tester",
-      "projectPath": "c:\\Users\\cross\\source\\repos\\GamsTester\\Tester\\Tester.csproj",
+      "projectPath": "C:\\Users\\cross\\source\\repos\\GamsTester\\Tester\\Tester.csproj",
       "packagesPath": "C:\\Users\\cross\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\cross\\source\\repos\\GamsTester\\Tester\\obj\\",
+      "outputPath": "C:\\Users\\cross\\source\\repos\\GamsTester\\Tester\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -661,7 +677,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\cross\\source\\repos\\GamsTester\\Combinator\\Combinator.csproj": {
+              "projectPath": "C:\\Users\\cross\\source\\repos\\GamsTester\\Combinator\\Combinator.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

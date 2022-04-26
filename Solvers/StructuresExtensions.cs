@@ -1,4 +1,6 @@
 using System.Linq;
+using CH.Combinations;
+
 namespace Tester;
 
 public static class StructuresExtensions
@@ -116,6 +118,12 @@ public static class StructuresExtensions
     public static void ClearX(this X x){
         for(int i =0 ;i < x.N;++i){
             Array.Fill(x.values[i],false);
+        }
+    }
+
+    public static void FillZCombinations(this Z z,int[] indexies){
+        foreach(var index in indexies){
+            z[index] = true;
         }
     }
 }

@@ -47,7 +47,7 @@ public class SolverDirector
         } );
         Parallel.ForEach(Enumerable.Range(1,Config.Itterations),(i) =>{
             Console.WriteLine($"Solving alg #{i}");
-            var algSolver = new AnnealingMethodSolver(Config,models[i - 1]);
+            var algSolver = new CombinationMethodSolver(Config,models[i - 1]);
             algResults.Add(algSolver.Solve());
             Console.WriteLine($"Solving alg #{i}... done");
         } );

@@ -29,3 +29,5 @@ C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Microsoft.Extensi
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\MathNet.Numerics.dll
+C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Combinator.dll
+C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Combinator.pdb
