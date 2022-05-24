@@ -3,10 +3,10 @@ using MathNet;
 using MathNet.Numerics;
 
 namespace Tester;
-public class AnnealingMethodSolver : Solver
+public class TwoSwapAnnealingMethodSolver : Solver
 {
     public S S_asterix;
-    public AnnealingMethodSolver(Config config, Model model) : base(config, model)
+    public TwoSwapAnnealingMethodSolver(Config config, Model model) : base(config, model)
     {
         S_asterix = FindBadSolution();
     }
@@ -16,7 +16,7 @@ public class AnnealingMethodSolver : Solver
         List<Z> reached_solutions = new List<Z>();
         reached_solutions.Add(S_asterix.Z);
         int all_possible_solution_count = (int)SpecialFunctions.Factorial(Model.Stores_Count) / (int)((SpecialFunctions.Factorial(Model.Stores_Count - Model.Count_Max)) * SpecialFunctions.Factorial(Model.Count_Max));
-
+       
         while (tk > Config.T_Min)
         {
             if (reached_solutions.Count() == all_possible_solution_count)
@@ -27,7 +27,7 @@ public class AnnealingMethodSolver : Solver
             }
             foreach (var itteration in Enumerable.Range(0, Config.L))
             {
-                var s_apos = S_asterix.Swap(Model).Copy();
+                var s_apos = S_asterix.Swap2(Model).Copy();
                 if (!reached_solutions.Contains(s_apos.Z))
                 {
                     reached_solutions.Add(s_apos.Z);
@@ -49,7 +49,7 @@ public class AnnealingMethodSolver : Solver
             //Console.WriteLine(tk);
         }
         var res = S_asterix.Convert();
-        res.C = Model.C;
+        res.C = Model.C; 
         return res;
     }
 

@@ -2,22 +2,29 @@ namespace Tester;
 
 public class ConsoleResultViewer : IResultViewer
 {
-    public ConsoleResultViewer()
+    public ConsoleResultViewer(SolverDirector director)
     {
+        Director = director;
     }
 
-    public void View(Results results)
+    public SolverDirector Director { get; }
+
+    public void View()
     {
-        List<(string name ,double ro)> average = new List<(string name ,double ro)>();
+        var results = Director.Solve();
+        Console.WriteLine("summary:");
         foreach(var result in results.values){
-            foreach(var elem in result.list){
-                Console.WriteLine(result.resultName);
-                Console.WriteLine(elem);
+            result.Elements.Sort((o1,o2) => o1.Number.CompareTo(o2.Number));
+            foreach(var elem in result.Elements){
+                Console.WriteLine($"{result.ResultName} {elem.Number} C: {elem.Model.C} : ro : {elem.Model.Ro}");
             }
-            average.Add(new(result.resultName,result.list.Average(x => x.Ro)));
         }
-        foreach(var elem in average){
-            Console.WriteLine($"{elem.name} : ro : {elem.ro}");
-        }
+        // Console.WriteLine("details:");
+        // foreach(var result in results.values){
+        //     foreach(var elem in result.list){
+        //         Console.WriteLine($"{result.resultName} {elem.number} : ro : {elem.model.Ro}");
+        //         Console.WriteLine($"{elem.model}");
+        //     }
+        // }
     }
 }

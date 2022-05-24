@@ -2,6 +2,7 @@ namespace Tester
 {
     public interface IResultViewer
     {
-        public void View(Results results);
+        public SolverDirector Director{get;}
+        public void View();
     }
 }

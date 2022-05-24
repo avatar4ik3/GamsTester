@@ -105,6 +105,47 @@ public static class StructuresExtensions
         return res;
     }
 
+    public static S Swap2(this S s,Model model)
+    {
+        var res = s.Copy();
+
+        ///
+
+        var trues = new (int index, bool value)[res.X.N];
+        for (int i = 0; i <res.X.N; ++i)
+        {
+            trues[i] = (i, res.Z[i]);
+        }
+        var z_true = trues.AsQueryable().Where(x => x.value == true).Select(x => x.index).ToArray();
+        var z_false = trues.AsQueryable().Where(x => x.value == false).Select(x => x.index).ToArray();
+
+        var i_true = new Random().Next(0, z_true.Count());
+        var i_false = new Random().Next(0, z_false.Count());
+        res.Z.values[z_true[i_true]] = false;
+        res.Z.values[z_false[i_false]] = true;
+
+        var z_2_true = z_true.Where(x => x != i_true).ToArray();
+
+        i_true = new Random().Next(0,z_2_true.Count());
+
+        var z_2_false = z_false.Where(x => x != i_false).ToArray();
+
+        i_false = new Random().Next(0,z_2_false.Count());
+
+        res.Z.values[z_true[i_true]] = false;
+        res.Z.values[z_false[i_false]] = true;
+
+        res.X.ClearX();
+
+        res.PlaceTruesInMostSuitablePlaces(model);
+
+
+        res.Ro = res.FindRo(model);
+        
+        ///
+        return res;
+    }
+
     public static ResultModel Convert(this S s){
         var res = new ResultModel(s.X.N,s.X.M);
         Array.Copy(s.Z.values,res.Z,s.X.N);
@@ -115,6 +156,15 @@ public static class StructuresExtensions
         return res;
     }
 
+    public static S Convert(this ResultModel s){
+        var res = new S(s.X.Length,s.X[0].Length);
+        Array.Copy(s.Z,res.Z.values,res.X.N);
+        for(int i = 0 ; i < res.X.N ; ++i ){
+            Array.Copy(s.X[i],res.X.values[i],res.X.M);
+        }
+        res.Ro = s.Ro;
+        return res;
+    }
     public static void ClearX(this X x){
         for(int i =0 ;i < x.N;++i){
             Array.Fill(x.values[i],false);

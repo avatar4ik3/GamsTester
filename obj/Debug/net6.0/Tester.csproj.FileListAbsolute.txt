@@ -2,7 +2,6 @@ C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Tester.exe
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Tester.deps.json
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Tester.runtimeconfig.json
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Tester.dll
-C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\ref\Tester.dll
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Tester.pdb
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\GAMS.net4.dll
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\GAMS.net4.xml
@@ -31,3 +30,4 @@ C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Microsoft.Extensi
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\MathNet.Numerics.dll
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Combinator.dll
 C:\Users\cross\source\repos\GamsTester\Tester\bin\Debug\net6.0\Combinator.pdb
+C:\Users\cross\source\repos\GamsTester\Tester\obj\Debug\net6.0\refint\Tester.dll

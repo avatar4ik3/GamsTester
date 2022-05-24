@@ -41,7 +41,9 @@ public class CombinationMethodSolver : Solver
             }
 
         }
-        return s_asterix.Convert();
+        var res = s_asterix.Convert();
+        res.C = Model.C; 
+        return res;
     }
 
     private S FindBadSolution()

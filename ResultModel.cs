@@ -5,6 +5,7 @@ public class ResultModel{
     public bool[][] X {get;set;} = null!;
     public bool[] Z {get;set;} = null!;
 
+    public int C {get;set;} = 0;
     public double Ro {get;set;}
     public int Customers_Count { get; }
     public int Stores_Count { get; }

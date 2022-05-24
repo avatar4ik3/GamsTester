@@ -12,9 +12,16 @@ public class Programm
 {
     public static void Main(string[] args)
     {
+        using  FileStream filestream = new FileStream("out.txt", FileMode.Create);
+        using var streamwriter = new StreamWriter(filestream);
+        streamwriter.AutoFlush = true;
+        Console.SetOut(streamwriter);
+        Console.SetError(streamwriter);
+
         IServiceProvider provider = BuildServiceProvider();
-        var dir = provider.GetService<SolverDirector>();
-        dir!.Solve();
+        var dir = provider.GetService<ConsoleResultViewer>();
+        dir!.View();
+
     }
 
     private static IServiceProvider BuildServiceProvider()
@@ -38,8 +45,11 @@ public class Programm
         collection.AddSingleton<Random>(rnd);
         collection.AddSingleton<SolverDirector>();
         collection.AddSingleton<ModelBuilderDirector>();
-        collection.AddSingleton<IResultViewer>(new ConsoleResultViewer());
-
+        collection.AddSingleton<ConsoleResultViewer>();
+        collection.AddSingleton<GAMSWorkspace>(new GAMSWorkspace(config.GamsWorkspaceFolder, config.GamsFolder));
+        collection.AddSingleton<RandomModelDataProvider>();
+        collection.AddSingleton<StepsProvider>();
+        collection.AddSingleton<string[]>(config.Solvers);
         return collection.BuildServiceProvider();
     }
 }
@@ -74,6 +84,8 @@ public class Config
     public int Itterations { get; set; }
 
     public string FileName { get; set; }
+
+    public string[] Solvers { get; set; }
 }
 
 

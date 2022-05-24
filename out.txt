@@ -1,0 +1,16 @@
+Annealing Solver : 0 solving.
+Annealing Solver : 4 solving.
+Annealing Solver : 2 solving.
+Annealing Solver : 3 solving.
+Annealing Solver : 1 solving.
+Annealing Solver : 0 solved.
+Annealing Solver : 1 solved.
+Annealing Solver : 2 solved.
+Annealing Solver : 4 solved.
+Annealing Solver : 3 solved.
+summary:
+Annealing Solver 0 C: 0 : ro : 263,57142857142856
+Annealing Solver 1 C: 0 : ro : 257,14285714285717
+Annealing Solver 2 C: 0 : ro : 362,14285714285717
+Annealing Solver 3 C: 0 : ro : 66,42857142857143
+Annealing Solver 4 C: 0 : ro : 169,28571428571428

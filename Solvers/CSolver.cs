@@ -2,9 +2,9 @@ using GAMS;
 
 namespace Tester;
 
-public class GamsSolver : Solver
+public class CSolver : Solver
 {
-    public GamsSolver(Config config, Model model, GAMSWorkspace ws, GAMSJob job) : base(config, model)
+    public CSolver(Config config, Model model, GAMSWorkspace ws,GAMSJob job) : base(config, model)
     {
         this.WS = ws;
         Job = job;
@@ -13,11 +13,8 @@ public class GamsSolver : Solver
         GAMSSet g_i = db.AddSet("i", 1, "a");
         GAMSSet g_j = db.AddSet("j", 1, "a");
         GAMSParameter g_count_max = db.AddParameter("count_max", "a");
-        GAMSParameter g_C = db.AddParameter("C", "a");
         GAMSParameter g_t = db.AddParameter("t", 2, "a");
         GAMSParameter g_w = db.AddParameter("w", 1, "a");
-
-        g_C.AddRecord().Value = Model.C;
         g_count_max.AddRecord().Value = Model.Count_Max;
 
         foreach (var i in Enumerable.Range(1, Model.Stores_Count))
@@ -42,11 +39,13 @@ public class GamsSolver : Solver
                 g_t.AddRecord(i.ToString() + "s", j.ToString() + "c").Value = Model.T[i - 1][j - 1];
             }
         }
+
     }
 
+    public GAMSDatabase db {get;private set;}
     public GAMSWorkspace WS { get; private set; }
     public GAMSJob Job { get; }
-    public GAMSDatabase db { get; private set; }
+
     public override ResultModel Solve()
     {
         GAMSOptions gOptions = WS.AddOptions();
@@ -54,31 +53,10 @@ public class GamsSolver : Solver
         Job.Run(gOptions, db);
 
         var result = new ResultModel(customers_Count: Model.Customers_Count, stores_Count: Model.Stores_Count);
-        foreach (GAMSVariableRecord elem in Job.OutDB.GetVariable("p"))
-        {
-            result.Ro = elem.Level;
+        foreach(GAMSVariableRecord elem in Job.OutDB.GetVariable("c")){
+            result.C = (int) elem.Level;
         }
 
-        int GamsSetElementToIntegerValue(string setElement)
-        {
-            var str = setElement.Substring(0, setElement.Length - 1);
-            return int.Parse(str) - 1;
-        }
-
-        bool ConvertDoubleToBool(double value)
-        {
-            return Math.Abs(value - 1) <= 1e-5 ? true : false;
-        }
-        foreach (GAMSVariableRecord elem in Job.OutDB.GetVariable("x"))
-        {
-            result.X[GamsSetElementToIntegerValue(elem.Keys[0])][GamsSetElementToIntegerValue(elem.Keys[1])] = ConvertDoubleToBool(elem.Level);
-        }
-
-        foreach (GAMSVariableRecord elem in Job.OutDB.GetVariable("z"))
-        {
-            result.Z[GamsSetElementToIntegerValue(elem.Keys[0])] = ConvertDoubleToBool(elem.Level);
-        }
-        result.C = Model.C;
         return result;
     }
 }

@@ -5,7 +5,6 @@ public abstract class Solver : ISolver
         Config = config;
         Model = model;
     }
-
     public Config Config { get; }
     public Model Model { get; }
 
